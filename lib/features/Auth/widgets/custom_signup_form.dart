@@ -1,7 +1,7 @@
 import 'package:fam_sync/core/widgets/SignUp_btn.dart';
 import 'package:fam_sync/features/Auth/presentation/auth_cubit/auth_state.dart';
 import 'package:fam_sync/features/Auth/presentation/auth_cubit/cubit/auth_cubit.dart';
-import 'package:fam_sync/features/Auth/widgets/custom_text_field.dart';
+import 'package:fam_sync/features/Auth/widgets/custom_textForm_field.dart';
 import 'package:fam_sync/features/Auth/widgets/terms_and_conditions_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,29 +14,50 @@ class CustomSignupForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {},
     builder: (context, state){
-     return Form(child: Column(
+     
+      AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
+
+     return Form(
+       key: authCubit.signupFormkey ,
+       child: Column(
       children: [
         CustomTextFormField(labelText: "First name",
         onChanged: (firstName){
-          BlocProvider.of<AuthCubit>(context).firstName = firstName;
+          authCubit.firstName = firstName;
         }),
         CustomTextFormField(labelText: "Last name",
         onChanged: (lastName){
-          BlocProvider.of<AuthCubit>(context).lastName = lastName;
+          authCubit.lastName = lastName;
         }),
         CustomTextFormField(labelText: "Email",
         onChanged: (emailAddress){
-          BlocProvider.of<AuthCubit>(context).emailAddress = emailAddress;
+          authCubit.emailAddress = emailAddress;
         }),
         CustomTextFormField(labelText: "Password",
+        suffixIcon: IconButton(icon: Icon(
+          authCubit.obscurePasswordTextValue == true?
+          Icons.visibility_outlined
+          : Icons.visibility_off_outlined,
+        ),
+        onPressed: () {
+                    authCubit.obscurePasswordText();
+                  },),
+                  obscureText: authCubit.obscurePasswordTextValue,
         onChanged: (password){
-          BlocProvider.of<AuthCubit>(context).password = password;
+          authCubit.password = password;
         }),
         TermsAndConditions() ,
          SizedBox(height: 100,),
-         SignupBtn(onPressed: (){
-          BlocProvider.of<AuthCubit>(context).signUpWithEmailAndPassword();
-         },) ,
+         SignupBtn(
+          onPressed: (){
+         if(authCubit.termsAndConditionCheckBoxValue == true)
+         {
+          if(authCubit.signupFormkey.currentState!.validate()){
+          authCubit.signUpWithEmailAndPassword();}
+         }
+
+        }
+      ),
 
 
       ],

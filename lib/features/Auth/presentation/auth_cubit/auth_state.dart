@@ -8,3 +8,6 @@ final class SignupFailerState extends AuthState{
     required this.errorMessage
   });
 }
+final class TermsAndConditionCheckBoxState extends AuthState{}
+
+final class ObscurePasswordTextUpdateState extends AuthState {}
