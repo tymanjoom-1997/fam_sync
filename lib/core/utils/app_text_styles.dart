@@ -35,8 +35,8 @@ abstract class CustomTextStyles {
 
    static const buttonText = TextStyle(
    fontSize: 20,
-   fontWeight: FontWeight.w300,
-   color:  Color(AppColors.white),
+   fontWeight: FontWeight.w500,
+   color:  Color(AppColors.warmCream),
    fontFamily: 'NunitoMeduim',
    );
 
@@ -63,7 +63,7 @@ abstract class CustomTextStyles {
    );
   
          static const textSpan2 = TextStyle(
-   fontSize: 12,
+   fontSize: 16,
    fontWeight: FontWeight.w400,
    color:  Color(AppColors.coral),
    decoration: TextDecoration.underline,
@@ -75,10 +75,26 @@ abstract class CustomTextStyles {
    color:  Color(AppColors.textGray),
    fontFamily: 'Nunito',
    );
+            
             static const textSpanLogin2 = TextStyle(
    fontSize: 16,
    fontWeight: FontWeight.w500,
    color:  Color(AppColors.coral),
    fontFamily: 'Nunito',
+   );
+
+     static const welcomeText1 = TextStyle(
+   fontSize: 30,
+   fontWeight: FontWeight.w500,
+   color:  Color(AppColors.tealDark),
+   fontFamily: 'Nunito',
+   
+  );
+
+    static const welcomeText2 = TextStyle(
+   fontSize: 16,
+   fontWeight: FontWeight.w400,
+   color:  Color(AppColors.lightGray),
+   fontFamily: 'NunitoMeduim',
    );
 }

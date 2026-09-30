@@ -14,10 +14,10 @@ class LoginBtn extends StatelessWidget{
     padding: EdgeInsets.only(bottom: 30),
     child: ElevatedButton(onPressed: onPressed,
   style: ElevatedButton.styleFrom(
-    backgroundColor:Color(AppColors.lightGray),
+    backgroundColor:Color(AppColors.tealDark),
     shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(20),)
   ),
-   child: const Text("Login", style: CustomTextStyles.normalTextWhite),
+   child: const Text("Login", style: CustomTextStyles.buttonText,),
   ),
   );
   }

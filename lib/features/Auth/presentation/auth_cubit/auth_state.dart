@@ -11,3 +11,12 @@ final class SignupFailerState extends AuthState{
 final class TermsAndConditionCheckBoxState extends AuthState{}
 
 final class ObscurePasswordTextUpdateState extends AuthState {}
+
+final class LoginLoadingState extends AuthState{}
+final class LoginSuccessState extends AuthState{}
+final class LoginFailerState extends AuthState{
+  final String errorMessage;
+   LoginFailerState({
+    required this.errorMessage
+  });
+}

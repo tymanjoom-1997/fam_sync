@@ -20,7 +20,7 @@ class SplashBody extends StatefulWidget {
           bool isOnBoardingVisited = getIt<CacheHelper>().getData(key: "isOnBoardingVisited")?? false;
          if(isOnBoardingVisited == true){
          FirebaseAuth.instance.currentUser==null ?
-          delayedNavigate(context,"/signUp")
+          delayedNavigate(context,"/login")
           : delayedNavigate(context,"/home");
          }else{
          delayedNavigate(context, "/on_boarding");}

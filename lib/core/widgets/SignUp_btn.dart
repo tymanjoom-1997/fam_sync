@@ -17,7 +17,7 @@ class SignupBtn extends StatelessWidget{
     backgroundColor: Color(AppColors.tealDark),
     shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(20),),
    ),
-   child: const Text("Sign Up", style: CustomTextStyles.normalTextWhite),
+   child: const Text("Sign Up", style: CustomTextStyles.buttonText),
   ),
   );
   }

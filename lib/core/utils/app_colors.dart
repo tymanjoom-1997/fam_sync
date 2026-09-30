@@ -7,4 +7,5 @@ abstract class AppColors {
  static const textGray = 0xff303638;
  static const white = 0xffFFFFFF;
  static const lightGray = 0xff6F7370;
+ static const lightYallow = 0xffffe7a3;
 }
