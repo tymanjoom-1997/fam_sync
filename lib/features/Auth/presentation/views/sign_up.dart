@@ -1,3 +1,4 @@
+import 'package:fam_sync/core/functions/navigation.dart';
 import 'package:fam_sync/core/utils/app_colors.dart';
 import 'package:fam_sync/features/Auth/widgets/custom_signup_form.dart';
 import 'package:fam_sync/features/Auth/widgets/have_an_account_widget.dart';
@@ -21,7 +22,10 @@ class SignUpView extends StatelessWidget{
      SliverToBoxAdapter(child: CustomSignupForm(),),
         SliverToBoxAdapter(child: HaveAnAccountWidget(
           text1: "Already have an account? ",
-          text2: " Log In",),),
+          text2: " Log In",
+          onTap: (){
+            customReplacementNavigate(context, "/login");
+          },),),
     
     ],
    ) ,),

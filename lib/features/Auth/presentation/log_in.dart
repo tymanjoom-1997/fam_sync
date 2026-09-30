@@ -5,8 +5,18 @@ class LogInView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-     
+    return  Scaffold(
+     appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              
+            },
+          ),
+        ],
+        title: Text('Home'),
+      ),
     );
   }
 

@@ -1,3 +1,6 @@
+import 'package:fam_sync/core/functions/custom_toast.dart';
+import 'package:fam_sync/core/functions/navigation.dart';
+import 'package:fam_sync/core/utils/app_colors.dart';
 import 'package:fam_sync/core/widgets/SignUp_btn.dart';
 import 'package:fam_sync/features/Auth/presentation/auth_cubit/auth_state.dart';
 import 'package:fam_sync/features/Auth/presentation/auth_cubit/cubit/auth_cubit.dart';
@@ -6,13 +9,20 @@ import 'package:fam_sync/features/Auth/widgets/terms_and_conditions_widget.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class CustomSignupForm extends StatelessWidget {
   const CustomSignupForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SignupSuccessState) {
+          showToast("Account created successfully");
+          customReplacementNavigate(context, "/home");
+        } else if(state is SignupFailerState){
+          showToast(state.errorMessage);
+        }    },
     builder: (context, state){
      
       AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
@@ -48,6 +58,9 @@ class CustomSignupForm extends StatelessWidget {
         }),
         TermsAndConditions() ,
          SizedBox(height: 100,),
+
+         state is SignupLoadingState ?
+          CircularProgressIndicator(color: Color(AppColors.coral),) :
          SignupBtn(
           onPressed: (){
          if(authCubit.termsAndConditionCheckBoxValue == true)

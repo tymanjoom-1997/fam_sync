@@ -4,6 +4,7 @@ import 'package:fam_sync/core/services/service_locator.dart';
 import 'package:fam_sync/core/utils/app_assets.dart';
 import 'package:fam_sync/core/utils/app_text_styles.dart';
 import 'package:fam_sync/core/utils/size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -18,7 +19,9 @@ class SplashBody extends StatefulWidget {
          void initState(){
           bool isOnBoardingVisited = getIt<CacheHelper>().getData(key: "isOnBoardingVisited")?? false;
          if(isOnBoardingVisited == true){
-          delayedNavigate(context,"/signUp");
+         FirebaseAuth.instance.currentUser==null ?
+          delayedNavigate(context,"/signUp")
+          : delayedNavigate(context,"/home");
          }else{
          delayedNavigate(context, "/on_boarding");}
          super.initState();
