@@ -21,7 +21,8 @@ class SplashBody extends StatefulWidget {
          if(isOnBoardingVisited == true){
          FirebaseAuth.instance.currentUser==null ?
           delayedNavigate(context,"/login")
-          : delayedNavigate(context,"/home");
+          : FirebaseAuth.instance.currentUser!.emailVerified == true ?
+          delayedNavigate(context,"/home") : delayedNavigate(context, "/login") ;
          }else{
          delayedNavigate(context, "/on_boarding");}
          super.initState();

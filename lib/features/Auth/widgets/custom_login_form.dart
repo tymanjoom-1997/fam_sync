@@ -7,6 +7,7 @@ import 'package:fam_sync/features/Auth/presentation/auth_cubit/auth_state.dart';
 import 'package:fam_sync/features/Auth/presentation/auth_cubit/cubit/auth_cubit.dart';
 import 'package:fam_sync/features/Auth/widgets/custom_textForm_field.dart';
 import 'package:fam_sync/features/Auth/widgets/forgot_password.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,8 +20,10 @@ class CustomLoginForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          showToast("Welcome back!");
-          customReplacementNavigate(context, "/home");
+         // showToast("Welcome back!");
+          FirebaseAuth.instance.currentUser!.emailVerified? 
+          customReplacementNavigate(context, "/home"):
+          showToast("Please verify your email before logging in.");
         } else if(state is LoginFailerState){
           showToast(state.errorMessage);
         }  

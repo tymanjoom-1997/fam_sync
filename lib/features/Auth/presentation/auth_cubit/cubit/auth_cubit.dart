@@ -15,27 +15,35 @@ class AuthCubit extends Cubit<AuthState>{
      GlobalKey<FormState> loginFormkey = GlobalKey();
      bool obscurePasswordTextValue = true;
 
- Future<void> signUpWithEmailAndPassword() async{
-  try {
-    emit(SignupLoadingState());
-  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: emailAddress!,
-    password: password!,
-  );
-  emit(SignupSuccessState());
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'weak-password') {
-    emit(SignupFailerState(errorMessage: 'The password provided is too weak.'));
-     
-  } else if (e.code == 'email-already-in-use') {
-    emit(SignupFailerState(errorMessage: 'The account already exists for that email.'));
-   
-  }
-} catch (e) {
-  emit(SignupFailerState(errorMessage: e.toString()));
-}
- }
+Future<void> signUpWithEmailAndPassword() async 
+{ try {
+   emit(SignupLoadingState());
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+       email: emailAddress!.trim(), 
+       password: password!, );
 
+       await verifyEmail();
+        emit(SignupSuccessState()); }
+    on FirebaseAuthException 
+    catch (e) { 
+      if (e.code == 'invalid-email') { 
+        emit( SignupFailerState( errorMessage: 'The email address is invalid.', ), ); } 
+        else if (e.code == 'email-already-in-use') { 
+          emit( SignupFailerState( errorMessage: 'The account already exists for that email.', ), ); }
+         else if (e.code == 'weak-password') { 
+          emit( SignupFailerState( errorMessage: 'The password provided is too weak.', ), ); }
+           else { 
+            emit( SignupFailerState( errorMessage: 'Something went wrong. Please try again.', ), ); 
+            } } catch (e) { 
+              emit( SignupFailerState( errorMessage: e.toString(), ), ); 
+} }
+
+ Future<void> verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
+
+    
 
 void updateTermsAndConditionCheckBox({required  newValue}){
   termsAndConditionCheckBoxValue = newValue;
@@ -52,8 +60,8 @@ void updateTermsAndConditionCheckBox({required  newValue}){
   }
 
 
- Future<void> loginWithEmailAndPassword()async{
-try {
+ Future<void> loginWithEmailAndPassword() async {
+    try {
       emit(LoginLoadingState());
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress!,
@@ -76,5 +84,5 @@ try {
         ),
       );
     }
-}
+  }
 }
