@@ -56,7 +56,7 @@ abstract class CustomTextStyles {
    );
 
         static const textSpan1 = TextStyle(
-   fontSize: 12,
+   fontSize: 16,
    fontWeight: FontWeight.w400,
    color:  Color(AppColors.textGray),
    fontFamily: 'Nunito',
