@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "619184823706",
+    "firebase_url": "https://famsyncapp-97-default-rtdb.firebaseio.com",
     "project_id": "famsyncapp-97",
     "storage_bucket": "famsyncapp-97.firebasestorage.app"
   },

@@ -10,7 +10,7 @@ showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 4,
+        timeInSecForIosWeb: 8,
         backgroundColor: Color(AppColors.primaryColor),
         textColor: Colors.white,
         fontSize: 16.0

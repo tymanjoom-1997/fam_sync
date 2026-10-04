@@ -2,6 +2,7 @@ import 'package:fam_sync/features/Auth/presentation/auth_cubit/auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthCubit extends Cubit<AuthState>{
   AuthCubit() : super(AuthInitial());
@@ -22,8 +23,10 @@ Future<void> signUpWithEmailAndPassword() async
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
        email: emailAddress!.trim(), 
        password: password!, );
-
+       
+       await addUserProfile();
        await verifyEmail();
+       
         emit(SignupSuccessState()); }
     on FirebaseAuthException 
     catch (e) { 
@@ -38,6 +41,7 @@ Future<void> signUpWithEmailAndPassword() async
             } } catch (e) { 
               emit( SignupFailerState( errorMessage: e.toString(), ), ); 
 } }
+
 
  Future<void> verifyEmail() async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
@@ -96,5 +100,15 @@ void updateTermsAndConditionCheckBox({required  newValue}){
       emit(ResetPasswordFailureState(errMessage: e.toString()));
     }
   }
+
+Future<void> addUserProfile() async {
+    CollectionReference users = FirebaseFirestore.instance.collection("users");
+    await users.add({
+      "email": emailAddress,
+      "first_name": firstName,
+      "last_name": lastName,
+    });
+  }
+
 
 }
