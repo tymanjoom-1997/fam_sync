@@ -62,11 +62,11 @@ class CustomSignupForm extends StatelessWidget {
          state is SignupLoadingState ?
           CircularProgressIndicator(color: Color(AppColors.coral),) :
          SignupBtn(
-          onPressed: (){
+          onPressed: ()async{
          if(authCubit.termsAndConditionCheckBoxValue == true)
          {
           if(authCubit.signupFormkey.currentState!.validate()){
-          authCubit.signUpWithEmailAndPassword();}
+          await authCubit.signUpWithEmailAndPassword();}
          }
 
         }

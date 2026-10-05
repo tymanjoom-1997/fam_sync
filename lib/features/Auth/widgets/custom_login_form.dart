@@ -22,7 +22,7 @@ class CustomLoginForm extends StatelessWidget {
         if (state is LoginSuccessState) {
          // showToast("Welcome back!");
           FirebaseAuth.instance.currentUser!.emailVerified? 
-          customReplacementNavigate(context, "/home"):
+          customReplacementNavigate(context, "/homenavbar"):
           showToast("Please verify your email before logging in.");
         } else if(state is LoginFailerState){
           showToast(state.errorMessage);
@@ -63,10 +63,10 @@ class CustomLoginForm extends StatelessWidget {
          state is SignupLoadingState ?
           CircularProgressIndicator(color: Color(AppColors.coral),) :
          LoginBtn(
-          onPressed: (){
+          onPressed: ()async{
         
           if(authCubit.loginFormkey.currentState!.validate()){
-          authCubit.loginWithEmailAndPassword();
+          await authCubit.loginWithEmailAndPassword();
           
          }
 
